@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/02/01 14:34:21 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/02/02 17:30:20 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME			=	philo
 CFLAGS			=	-Wall -Wextra -Werror
 OBJS			=	$(SRCS:.c=.o)
 SRCS			=	philo.c \
+					SRC/utils/ft_atoi.c \
 
 ifdef LEAKS
 	CFLAGS += -g3 -fsanitize=address
@@ -34,7 +35,7 @@ all:	  $(NAME)
 %.o: %.c
 	gcc $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) mlx
+$(NAME): $(OBJS)
 	@clear
 	@echo $(START)
 	@gcc $(CFLAGS) $(OBJS) -o $(NAME)
