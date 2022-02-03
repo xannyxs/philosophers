@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/02/02 17:30:20 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/02/03 12:29:26 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME			=	philo
 CFLAGS			=	-Wall -Wextra -Werror
 OBJS			=	$(SRCS:.c=.o)
 SRCS			=	philo.c \
+					SRC/create_mutex.c \
+					SRC/create_thread.c \
 					SRC/utils/ft_atoi.c \
 
 ifdef LEAKS

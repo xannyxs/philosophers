@@ -6,84 +6,70 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:13 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/02 19:21:02 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/03 19:55:20 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	eat(int i, t_vars *vars)
-{
-	pthread_mutex_lock(&vars->forks[i]);
-	pthread_mutex_lock(&vars->forks[i + 1]);
-	printf("%d is eating\n", i);
-	pthread_mutex_unlock(vars->forks);
-}
-
 void	*start(t_vars *vars)
 {
-	static int	i;
-
-	i = 1;
-	while (true)
-	{
-		if (i >= vars->input.philos)
-			i = 1;
-		eat(i, vars);
-		i++;
-	}
+	printf("Lock 1: %d\n", vars->philos.left_fork);
+	printf("Lock 2: %d\n", vars->philos.right_fork);
+	pthread_mutex_lock(&vars->forks[0]);
+	pthread_mutex_lock(&vars->forks[1]);
+	if ((vars->philos.philo_number % 2) == 0)
+		printf("%d is eating\n", vars->philos.philo_number);
+	else
+		printf("%d is sleeping\n", vars->philos.philo_number);
+	pthread_mutex_unlock(vars->forks);
 	return (NULL);
 }
 
-void	create_philo(t_vars *vars)
+void	convert_all_values(char *argv[], t_input *input)
 {
-	int				i;
-	int				err;
+	input->philos = ft_atoi(argv[1]);
+	input->time_die = ft_atoi(argv[2]);
+	input->time_eat = ft_atoi(argv[3]);
+	input->time_sleep = ft_atoi(argv[4]);
+}
+
+void	give_values(t_vars *vars, t_input input)
+{
+	int	i;
 
 	i = 0;
-	vars->forks = malloc(sizeof(pthread_mutex_t) * vars->input.philos);
-	if (vars->forks == NULL)
+	while (i < input.philos)
 	{
-		free(vars->forks);
-		exit (-1);
-	}
-	while (i < vars->input.philos)
-	{
-		err = pthread_mutex_init(&vars->forks[i], NULL);
-		if (err != 0)
-		{
-			pthread_mutex_destroy(vars->forks);
-			exit (err);
-		}
+		vars[i].input = input;
+		vars[i].philos.left_fork = i;
+		vars[i].philos.right_fork = i + 1;
 		i++;
 	}
-	i = 0;
-	vars->threads = malloc(sizeof(pthread_t) * vars->input.philos);
-	while (i < vars->input.philos)
-	{
-		err = pthread_create(vars->threads, NULL, (void *)start, vars);
-		if (err != 0)
-		{
-			pthread_exit(NULL);
-			exit(err);
-		}
-		i++;
-	}
+	vars[i].philos.right_fork = 0;
 }
 
 int	main(int argc, char *argv[])
 {
 	int			i;
-	t_vars		vars;
+	t_vars		*vars;
+	t_input		input;
 
 	i = 0;
 	if (argc == 5)
 	{
-		vars.input.philos = ft_atoi(argv[1]);
-		vars.input.time_die = ft_atoi(argv[2]);
-		vars.input.time_eat = ft_atoi(argv[3]);
-		vars.input.time_sleep = ft_atoi(argv[4]);
-		create_philo(&vars);
+		vars = malloc(sizeof(t_philos) * ft_atoi(argv[1]));
+		if (vars == NULL)
+			exit(-1);
+		convert_all_values(argv, &input);
+		give_values(vars, input);
+		create_mutex(vars);
+		while (i < input.philos)
+		{
+			vars[i].philos.philo_number = i;
+			i++;
+		}
+		create_thread(vars);
 		pthread_exit(NULL);
 	}
 	return (0);
