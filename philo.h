@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/03 17:45:44 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/07 16:38:11 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_input {
 	int	time_die;
 	int	time_eat;
 	int	time_sleep;
+	int	amount_eat;
 }				t_input;
 
 typedef struct s_vars {
@@ -45,9 +46,9 @@ typedef struct s_vars {
     PHILO
 */
 
-void	create_thread(t_vars *vars);
+int		setup_thread(t_vars *vars);
 
-void	create_mutex(t_vars *vars);
+int		setup_mutex(t_vars *vars);
 
 void	*start(t_vars *arg);
 
