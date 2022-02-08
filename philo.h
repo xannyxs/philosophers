@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/07 16:38:11 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/08 17:20:54 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 
 
 typedef struct s_philos {
-	int	philo_number;
-	int	left_fork;
-	int	right_fork;
-}				t_philos;
+	int		philo_number;
+	int		left_fork;
+	int		right_fork;
+	t_vars	*vars;
+}	t_philos;
 
 typedef struct s_input {
 	int	philos;
@@ -33,24 +34,23 @@ typedef struct s_input {
 	int	time_eat;
 	int	time_sleep;
 	int	amount_eat;
-}				t_input;
+}	t_input;
 
 typedef struct s_vars {
 	t_input			input;
-	t_philos		philos;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
-}			t_vars;
+}	t_vars;
 
 /*
     PHILO
 */
 
-int		setup_thread(t_vars *vars);
+void	start_thread(t_philos *philos);
 
-int		setup_mutex(t_vars *vars);
+int		setup_mutex(t_philos *philos);
 
-void	*start(t_vars *arg);
+void	*start(t_philos *arg);
 
 /*
     UTILS

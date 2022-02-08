@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 15:33:02 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/07 16:44:55 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/08 17:16:19 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,34 @@ void	convert_input(char *argv[], t_input *input)
 		input->amount_eat = ft_atoi(argv[5]);
 }
 
-void	setup_philo(t_vars *vars, t_input input)
+void	setup_philo(t_philos *philos, t_input input)
 {
-	int	j;
+	int	i;
 
-	j = 0;
-	while (j < input.philos)
+	i = 0;
+	while (i < input.philos)
 	{
-		vars[j].input = input;
-		vars[j].philos.philo_number = j;
-		vars[j].philos.left_fork = j;
-		vars[j].philos.right_fork = j + 1;
-		j++;
+		philos[i].vars.input = input;
+		philos[i].philo_number = i;
+		philos[i].left_fork = i;
+		philos[i].right_fork = i + 1;
+		i++;
 	}
+	i--;
+	philos[i].right_fork = 0;
 }
 
 int	main(int argc, char *argv[])
 {
-	t_input	input;
-	t_vars	*vars;
+	t_input		input;
+	t_philos	*philos;
 
 	if (argc != 5 && argc != 6)
 		return (1);
 	convert_input(argv, &input);
-	vars->philos = malloc(sizeof(t_philos) * input.philos);
-	setup_philo(vars, input);
-	setup_mutex(vars);
+	philos = malloc(sizeof(t_philos) * input.philos);
+	setup_philo(philos, input);
+	setup_mutex(philos);
+	start_thread(philos);;
 	return (0);
 }
