@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/02/09 17:00:49 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/02/09 17:43:59 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS			=	philo.c \
 					SRC/create_mutex.c \
 					SRC/start_thread.c \
 					SRC/utils/ft_atoi.c \
+					SRC/utils/get_time.c \
 
 ifdef LEAKS
 	CFLAGS += -g3 -fsanitize=address

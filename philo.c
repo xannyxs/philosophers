@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 15:33:02 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/09 16:10:32 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/09 17:37:47 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	setup_philo(t_philos *philos, t_input input)
 	int	i;
 
 	i = 0;
-	gettimeofday(&philos[i].tv, NULL);
+	gettimeofday(&philos->start_tv, NULL);
 	while (i < input.philos)
 	{
 		philos[i].input = input;
@@ -35,7 +35,7 @@ void	setup_philo(t_philos *philos, t_input input)
 		philos[i].philo_number = i;
 		philos[i].left_fork = i;
 		philos[i].right_fork = i + 1;
-		philos[i].tv = philos->tv;
+		philos[i].start_tv = philos->start_tv;
 		if ((philos[i].philo_number % 2) != 0)
 			philos[i].eaten = true;
 		i++;
