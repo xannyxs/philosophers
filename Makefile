@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/02/08 14:28:07 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/02/09 15:38:32 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ MESSAGE			= "$(BLUE)---\nCompiling done! Run ./$(NAME)\n---$(NC)"
 COMP_MESSAGE	= "$(GREEN)Building C object... $(NC)%-33.33s\r\n"
 REM_MESSAGE		= "$(RED)Removing files...$(NC)"
 
-all:	  $(NAME)
+all:	$(NAME)
 
 %.o: %.c
 	gcc $(CFLAGS) -c $< -o $@

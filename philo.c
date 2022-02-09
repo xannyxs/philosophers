@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 15:33:02 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/08 17:16:19 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/09 14:50:42 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ void	setup_philo(t_philos *philos, t_input input)
 	i = 0;
 	while (i < input.philos)
 	{
-		philos[i].vars.input = input;
+		philos[i].input = input;
+		philos[i].vars = philos->vars;
 		philos[i].philo_number = i;
 		philos[i].left_fork = i;
 		philos[i].right_fork = i + 1;
+		if ((philos[i].philo_number % 2) != 0)
+			philos[i].eaten = true;
 		i++;
 	}
 	i--;
@@ -48,8 +51,9 @@ int	main(int argc, char *argv[])
 		return (1);
 	convert_input(argv, &input);
 	philos = malloc(sizeof(t_philos) * input.philos);
+	philos->vars = malloc(sizeof(t_vars));
 	setup_philo(philos, input);
 	setup_mutex(philos);
-	start_thread(philos);;
+	start_thread(philos);
 	return (0);
 }

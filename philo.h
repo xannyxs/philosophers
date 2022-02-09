@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/08 17:20:54 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/09 12:52:15 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-
-typedef struct s_philos {
-	int		philo_number;
-	int		left_fork;
-	int		right_fork;
-	t_vars	*vars;
-}	t_philos;
-
 typedef struct s_input {
 	int	philos;
 	int	time_die;
@@ -37,10 +29,18 @@ typedef struct s_input {
 }	t_input;
 
 typedef struct s_vars {
-	t_input			input;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 }	t_vars;
+
+typedef struct s_philos {
+	int		philo_number;
+	int		left_fork;
+	int		right_fork;
+	int		eaten;
+	t_input	input;
+	t_vars	*vars;
+}	t_philos;
 
 /*
     PHILO
