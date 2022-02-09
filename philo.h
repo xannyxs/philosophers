@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/09 12:52:15 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/09 16:01:39 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philos {
 	int		eaten;
 	t_input	input;
 	t_vars	*vars;
+	struct timeval tv;
 }	t_philos;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/09 15:22:59 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/09 17:13:40 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 
 void	*start(t_philos *philos)
 {
+	int	time;
+	
+	time = philos->tv.tv_usec;
 	while (true)
 	{
-		pthread_mutex_lock(&philos->vars->forks[philos->left_fork]);
-		pthread_mutex_lock(&philos->vars->forks[philos->right_fork]);
 		if (philos->eaten != true)
 		{
+			pthread_mutex_lock(&philos->vars->forks[philos->left_fork]);
+			pthread_mutex_lock(&philos->vars->forks[philos->right_fork]);
 			printf("%d is eating\n", philos->philo_number);
 			philos->eaten = true;
+			usleep(philos->input.time_eat);
+			pthread_mutex_unlock(&philos->vars->forks[philos->left_fork]);
+			pthread_mutex_unlock(&philos->vars->forks[philos->right_fork]);
 		}
 		else
 		{
 			printf("%d is sleeping\n", philos->philo_number);
+			usleep(philos->input.time_sleep);
 			philos->eaten = false;
 		}
-		pthread_mutex_unlock(&philos->vars->forks[philos->left_fork]);
-		pthread_mutex_unlock(&philos->vars->forks[philos->right_fork]);
 		usleep(10000000);
 	}
 	return (NULL);
