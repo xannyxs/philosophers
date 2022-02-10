@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/09 17:31:48 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/09 19:34:46 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/10 18:57:00 by xander        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ struct timeval	get_time(t_philos *philos)
 	if (err != 0)
 		exit(1);
 	result_tv.tv_sec = (philos->end_tv.tv_sec - philos->start_tv.tv_sec) * 100;
-	// printf("TIME: %ld = %ld - %ld\n", result_tv.tv_sec, philos->start_tv.tv_sec, philos->end_tv.tv_sec);
 	return (result_tv);
 }

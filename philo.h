@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/09 19:22:07 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/02/10 19:05:59 by xander        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ typedef struct s_philos {
     PHILO
 */
 
-void	start_thread(t_philos *philos);
+void			start_thread(t_philos *philos);
 
-int		setup_mutex(t_philos *philos);
+int				setup_mutex(t_philos *philos);
 
-void	*start(t_philos *arg);
+void			*start(void *arg);
 
 struct timeval	get_time(t_philos *philos);
 
@@ -60,6 +60,6 @@ struct timeval	get_time(t_philos *philos);
     UTILS
 */
 
-int		ft_atoi(const char *str);
+int				ft_atoi(const char *str);
 
 #endif
