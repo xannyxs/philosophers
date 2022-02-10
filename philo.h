@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/10 19:05:59 by xander        ########   odam.nl         */
+/*   Updated: 2022/02/10 22:51:26 by xander        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
 
 typedef struct s_input {
 	int	philos;
@@ -37,7 +41,7 @@ typedef struct s_philos {
 	int				philo_number;
 	int				left_fork;
 	int				right_fork;
-	int				eaten;
+	int				status;
 	t_input			input;
 	t_vars			*vars;
 	struct timeval	start_tv;
@@ -45,7 +49,7 @@ typedef struct s_philos {
 }	t_philos;
 
 /*
-    PHILO
+	PHILO
 */
 
 void			start_thread(t_philos *philos);
@@ -57,7 +61,17 @@ void			*start(void *arg);
 struct timeval	get_time(t_philos *philos);
 
 /*
-    UTILS
+	PHASES PHILOS
+*/
+
+void			start_think(t_philos *philos);
+
+void			start_sleep(t_philos *philos);
+
+void			start_eat(t_philos *philos);
+
+/*
+	UTILS
 */
 
 int				ft_atoi(const char *str);

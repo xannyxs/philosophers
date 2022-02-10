@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/10 19:04:10 by xander        ########   odam.nl         */
+/*   Updated: 2022/02/10 22:33:38 by xander        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,12 @@ void	*start(void *arg)
 	while (true)
 	{
 		philos->end_tv = get_time(philos);
-		if (philos->eaten != true)
-		{
-			printf("%ld | %d has taken a fork\n", \
-				philos->end_tv.tv_sec, philos->philo_number);
-			pthread_mutex_lock(&philos->vars->forks[philos->left_fork]);
-			pthread_mutex_lock(&philos->vars->forks[philos->right_fork]);
-			printf("%ld | %d is eating\n", \
-				philos->end_tv.tv_sec, philos->philo_number);
-			philos->eaten = true;
-			usleep(philos->input.time_eat * 1000);
-			pthread_mutex_unlock(&philos->vars->forks[philos->left_fork]);
-			pthread_mutex_unlock(&philos->vars->forks[philos->right_fork]);
-		}
-		else
-		{
-			printf("%ld | %d is sleeping\n", \
-				philos->end_tv.tv_sec, philos->philo_number);
-			usleep(philos->input.time_sleep * 1000);
-			philos->eaten = false;
-		}
+		if (philos->status == EAT)
+			start_eat(philos);
+		else if (philos->status == SLEEP)
+			start_sleep(philos);
+		else if (philos->status == THINK)
+			start_think(philos);
 	}
 	return (NULL);
 }

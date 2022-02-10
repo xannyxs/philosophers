@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 15:33:02 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/10 19:05:37 by xander        ########   odam.nl         */
+/*   Updated: 2022/02/10 22:25:24 by xander        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	setup_philo(t_philos *philos, t_input input)
 		philos[i].left_fork = i;
 		philos[i].right_fork = i + 1;
 		philos[i].start_tv = philos->start_tv;
-		if ((philos[i].philo_number % 2) != 0)
-			philos[i].eaten = true;
+		if ((philos[i].philo_number % 2) == 0)
+			philos[i].status = EAT;
+		else
+			philos[i].status = SLEEP;
 		i++;
 	}
 	i--;
