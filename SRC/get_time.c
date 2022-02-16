@@ -6,20 +6,21 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/09 17:31:48 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/10 22:51:21 by xander        ########   odam.nl         */
+/*   Updated: 2022/02/16 19:28:30 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../philo.h"
+#include "philo.h"
 
-struct timeval	get_time(t_philos *philos)
+unsigned long long	get_time(void)
 {
-	int				err;
-	struct timeval	result_tv;
+	int					err;
+	unsigned long long	time;
+	struct timeval		timeval;
 
-	err = gettimeofday(&philos->end_tv, NULL);
+	err = gettimeofday(&timeval, NULL);
 	if (err != 0)
 		exit(1);
-	result_tv.tv_sec = (philos->end_tv.tv_sec - philos->start_tv.tv_sec) * 100;
-	return (result_tv);
+	time = (timeval.tv_sec * 1000) + (timeval.tv_usec / 1000);
+	return (time);
 }

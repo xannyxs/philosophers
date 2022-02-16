@@ -6,11 +6,11 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/10 22:33:38 by xander        ########   odam.nl         */
+/*   Updated: 2022/02/16 19:14:43 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 void	*start(void *arg)
 {
@@ -19,7 +19,6 @@ void	*start(void *arg)
 	philos = arg;
 	while (true)
 	{
-		philos->end_tv = get_time(philos);
 		if (philos->status == EAT)
 			start_eat(philos);
 		else if (philos->status == SLEEP)
@@ -29,10 +28,6 @@ void	*start(void *arg)
 	}
 	return (NULL);
 }
-
-/*
-
-*/
 
 void	start_thread(t_philos *philos)
 {

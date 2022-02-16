@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/10 22:51:26 by xander        ########   odam.nl         */
+/*   Updated: 2022/02/16 18:38:19 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,42 @@ typedef struct s_vars {
 }	t_vars;
 
 typedef struct s_philos {
-	int				philo_number;
-	int				left_fork;
-	int				right_fork;
-	int				status;
-	t_input			input;
-	t_vars			*vars;
-	struct timeval	start_tv;
-	struct timeval	end_tv;
+	int					philo_number;
+	int					left_fork;
+	int					right_fork;
+	int					status;
+	t_input				input;
+	t_vars				*vars;
+	unsigned long long	start_time;
+	unsigned long long	end_time;
 }	t_philos;
 
 /*
 	PHILO
 */
 
-void			start_thread(t_philos *philos);
+void				start_thread(t_philos *philos);
 
-int				setup_mutex(t_philos *philos);
+int					setup_mutex(t_philos *philos);
 
-void			*start(void *arg);
+void				*start(void *arg);
 
-struct timeval	get_time(t_philos *philos);
+unsigned long long	get_time(void);
 
 /*
 	PHASES PHILOS
 */
 
-void			start_think(t_philos *philos);
+void				start_think(t_philos *philos);
 
-void			start_sleep(t_philos *philos);
+void				start_sleep(t_philos *philos);
 
-void			start_eat(t_philos *philos);
+void				start_eat(t_philos *philos);
 
 /*
 	UTILS
 */
 
-int				ft_atoi(const char *str);
+int					ft_atoi(const char *str);
 
 #endif

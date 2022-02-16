@@ -6,21 +6,28 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/02/10 22:34:16 by xander        ########   odam.nl          #
+#    Updated: 2022/02/16 19:33:51 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	philo
+CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
-OBJS			=	$(SRCS:.c=.o)
-SRCS			=	philo.c \
-					SRC/create_mutex.c \
-					SRC/start_thread.c \
-					SRC/utils/ft_atoi.c \
-					SRC/utils/get_time.c \
-					SRC/start_eat.c \
-					SRC/start_sleep.c \
-					SRC/start_think.c \
+OBJ_DIR			=	OBJ
+SRC_DIR			=	SRC
+INC_DIR			=	INC
+
+SRCS			=	$(SRC_DIR)/philo.c \
+					$(SRC_DIR)/get_time.c \
+					$(SRC_DIR)/ft_atoi.c \
+					$(SRC_DIR)/start_eat.c \
+					$(SRC_DIR)/start_think.c \
+					$(SRC_DIR)/start_thread.c \
+					$(SRC_DIR)/start_sleep.c \
+					$(SRC_DIR)/create_mutex.c \
+
+OBJS			=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+HEADERS			=	INC/philo.h
 
 ifdef LEAKS
 	CFLAGS += -g3 -fsanitize=address
@@ -38,14 +45,16 @@ REM_MESSAGE		= "$(RED)Removing files...$(NC)"
 
 all:	$(NAME)
 
-%.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
+
+$(OBJ_DIR):
+	mkdir $@
 
 $(NAME): $(OBJS)
-	@clear
 	@echo $(START)
-	@gcc $(CFLAGS) $(OBJS) -o $(NAME)
 	@printf $(COMP_MESSAGE) $(SRCS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo $(MESSAGE)
 
 clean:
