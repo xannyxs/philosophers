@@ -6,17 +6,23 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/16 19:14:43 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/05 22:48:51 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdbool.h>
 
 void	*start(void *arg)
 {
 	t_philos	*philos;
 
 	philos = arg;
+	if ((philos->status % 2) == true)
+		usleep(1000);
 	while (true)
 	{
 		if (philos->status == EAT)

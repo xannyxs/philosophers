@@ -6,11 +6,14 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/09 17:31:48 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/16 19:28:30 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/05 22:35:37 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+#include <sys/time.h>
+#include <stdlib.h>
 
 unsigned long long	get_time(void)
 {

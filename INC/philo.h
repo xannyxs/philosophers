@@ -6,19 +6,14 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/16 18:38:19 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/05 22:46:58 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
 # include <pthread.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <string.h>
-# include <sys/time.h>
-# include <unistd.h>
-# include <stdlib.h>
 
 # define EAT 1
 # define SLEEP 2

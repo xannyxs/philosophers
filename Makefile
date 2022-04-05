@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/02/16 19:33:51 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/04/05 22:40:16 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ INC_DIR			=	INC
 
 SRCS			=	$(SRC_DIR)/philo.c \
 					$(SRC_DIR)/get_time.c \
-					$(SRC_DIR)/ft_atoi.c \
-					$(SRC_DIR)/start_eat.c \
-					$(SRC_DIR)/start_think.c \
-					$(SRC_DIR)/start_thread.c \
-					$(SRC_DIR)/start_sleep.c \
 					$(SRC_DIR)/create_mutex.c \
+					$(SRC_DIR)/start_thread.c \
+					$(SRC_DIR)/utils/ft_atoi.c \
+					$(SRC_DIR)/actions/start_eat.c \
+					$(SRC_DIR)/actions/start_think.c \
+					$(SRC_DIR)/actions/start_sleep.c \
 
 OBJS			=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADERS			=	INC/philo.h
@@ -46,6 +46,7 @@ REM_MESSAGE		= "$(RED)Removing files...$(NC)"
 all:	$(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
 
 $(OBJ_DIR):

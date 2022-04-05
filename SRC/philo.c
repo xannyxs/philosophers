@@ -6,11 +6,14 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/02/16 19:12:21 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/05 22:35:28 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+#include <stdlib.h>
+#include <sys/time.h>
 
 void	convert_input(char *argv[], t_input *input)
 {
