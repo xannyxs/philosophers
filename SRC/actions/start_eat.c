@@ -6,7 +6,7 @@
 /*   By: xander <xander@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/10 22:31:45 by xander        #+#    #+#                 */
-/*   Updated: 2022/04/05 22:48:31 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/06 20:32:12 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 void	start_eat(t_philos *philos)
 {
 	pthread_mutex_lock(&philos->vars->forks[philos->left_fork]);
-	printf("%4lld | %d has taken a left fork\n", \
-		get_time() - philos->start_time, philos->philo_number);
+	printf("%4d | %d has taken a left fork\n", \
+		get_current_time(philos), philos->philo_number);
 	pthread_mutex_lock(&philos->vars->forks[philos->right_fork]);
-	printf("%4lld | %d has taken a right fork\n", \
-		get_time() - philos->start_time, philos->philo_number);
+	printf("%4d | %d has taken a right fork\n", \
+		get_current_time(philos), philos->philo_number);
 	philos->status = SLEEP;
-	printf("%4lld | %d is eating\n", \
-		get_time() - philos->start_time, philos->philo_number);
+	printf("%4d | %d is eating\n", \
+		get_current_time(philos), philos->philo_number);
+	philos->last_time_eaten = get_current_time(philos);
 	usleep(philos->input.time_eat * 1000);
 	pthread_mutex_unlock(&philos->vars->forks[philos->left_fork]);
 	pthread_mutex_unlock(&philos->vars->forks[philos->right_fork]);

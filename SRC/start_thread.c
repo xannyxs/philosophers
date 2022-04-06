@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/05 22:48:51 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/06 20:30:59 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,32 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-void	*start(void *arg)
+#include <stdio.h>
+
+static bool	is_philo_dying(t_philos *philos)
+{
+	if (get_current_time(philos) - philos->last_time_eaten >= \
+		(unsigned long long) philos->input.time_die)
+		return (true);
+	return (false);
+}
+
+static void	*start_routine(void *arg)
 {
 	t_philos	*philos;
 
 	philos = arg;
+	philos->last_time_eaten = 0;
 	if ((philos->status % 2) == true)
-		usleep(1000);
+		usleep(50);
 	while (true)
 	{
+		// printf("%llu\n", (get_current_time() - philos->last_time_eaten);
+		if (is_philo_dying(philos) == true)
+		{
+			printf("philo %d has died\n", philos->philo_number);
+			exit(1);
+		}
 		if (philos->status == EAT)
 			start_eat(philos);
 		else if (philos->status == SLEEP)
@@ -45,7 +62,8 @@ void	start_thread(t_philos *philos)
 		exit(-1);
 	while (i < philos->input.philos)
 	{
-		pthread_create(philos[i].vars->threads, NULL, start, &philos[i]);
+		pthread_create(philos[i].vars->threads, NULL, \
+			start_routine, &philos[i]);
 		i++;
 	}
 	i = 0;

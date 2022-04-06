@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   start_sleep.c                                      :+:    :+:            */
+/*   start_death.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: xander <xander@student.codam.nl>             +#+                     */
+/*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/10 22:32:59 by xander        #+#    #+#                 */
-/*   Updated: 2022/04/06 20:42:55 by xvoorvaa      ########   odam.nl         */
+/*   Created: 2022/04/06 17:11:44 by xvoorvaa      #+#    #+#                 */
+/*   Updated: 2022/04/06 20:26:42 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 #include <stdio.h>
-#include <unistd.h>
+#include <stdlib.h>
 
-void	start_sleep(t_philos *philos)
+void	start_death(t_philos *philos)
 {
-	printf("%4d | %d is sleeping\n", \
-		get_current_time(philos), philos->philo_number);
-	usleep(philos->input.time_sleep * 1000);
-	philos->status = THINK;
+	(void) philos->last_time_eaten;
+	exit(1);
 }

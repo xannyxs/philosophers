@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/04/05 22:40:16 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/04/06 20:47:19 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,17 @@ SRCS			=	$(SRC_DIR)/philo.c \
 					$(SRC_DIR)/actions/start_eat.c \
 					$(SRC_DIR)/actions/start_think.c \
 					$(SRC_DIR)/actions/start_sleep.c \
+					$(SRC_DIR)/actions/start_death.c \
 
 OBJS			=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADERS			=	INC/philo.h
 
-ifdef LEAKS
+ifdef DEBUG
 	CFLAGS += -g3 -fsanitize=address
+else ifdef THREAD
+	CFLAGS += -g3 -fsanitize=thread
+else
+	CFLAGS += -O2
 endif
 
 GREEN			=	\033[1;32m

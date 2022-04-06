@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/05 22:46:58 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/06 20:25:08 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 # include <pthread.h>
 
-# define EAT 1
-# define SLEEP 2
-# define THINK 3
+enum	e_status
+{
+	EAT = 1,
+	SLEEP = 2,
+	THINK = 3
+};
 
 typedef struct s_input {
 	int	philos;
@@ -40,7 +43,7 @@ typedef struct s_philos {
 	t_input				input;
 	t_vars				*vars;
 	unsigned long long	start_time;
-	unsigned long long	end_time;
+	unsigned long long	last_time_eaten;
 }	t_philos;
 
 /*
@@ -55,6 +58,8 @@ void				*start(void *arg);
 
 unsigned long long	get_time(void);
 
+int					get_current_time(t_philos *philos);
+
 /*
 	PHASES PHILOS
 */
@@ -64,6 +69,8 @@ void				start_think(t_philos *philos);
 void				start_sleep(t_philos *philos);
 
 void				start_eat(t_philos *philos);
+
+void				start_death(t_philos *philos);
 
 /*
 	UTILS
