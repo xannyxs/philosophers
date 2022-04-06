@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/06 20:30:59 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/06 21:02:30 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ static void	*start_routine(void *arg)
 
 	philos = arg;
 	philos->last_time_eaten = 0;
-	if ((philos->status % 2) == true)
-		usleep(50);
 	while (true)
 	{
-		// printf("%llu\n", (get_current_time() - philos->last_time_eaten);
 		if (is_philo_dying(philos) == true)
 		{
 			printf("philo %d has died\n", philos->philo_number);
@@ -59,7 +56,7 @@ void	start_thread(t_philos *philos)
 	i = 0;
 	philos->vars->threads = malloc(sizeof(pthread_t) * philos->input.philos);
 	if (philos->vars->threads == NULL)
-		exit(-1);
+		exit(1);
 	while (i < philos->input.philos)
 	{
 		pthread_create(philos[i].vars->threads, NULL, \
