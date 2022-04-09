@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/06 20:24:57 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/09 17:45:04 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	setup_philo(t_philos *philos, t_input input)
 
 int	main(int argc, char *argv[])
 {
+	int			err;
 	t_input		input;
 	t_philos	*philos;
 
@@ -58,9 +59,17 @@ int	main(int argc, char *argv[])
 		return (1);
 	convert_input(argv, &input);
 	philos = malloc(sizeof(t_philos) * input.philos);
+	if (philos == NULL)
+		return (1);
 	philos->vars = malloc(sizeof(t_vars));
+	if (philos->vars == NULL)
+		return (1);
 	setup_philo(philos, input);
-	setup_mutex(philos);
-	start_thread(philos);
+	err = setup_mutex(philos);
+	if (err != 0)
+		return (1);
+	err = start_thread(philos);
+	if (err != 0)
+		return (1);
 	return (0);
 }

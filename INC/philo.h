@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/06 20:25:08 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/09 17:45:18 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_philos {
 	PHILO
 */
 
-void				start_thread(t_philos *philos);
+int					start_thread(t_philos *philos);
 
 int					setup_mutex(t_philos *philos);
 

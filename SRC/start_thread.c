@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/06 21:02:30 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/09 17:56:49 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,43 @@ static void	*start_routine(void *arg)
 	return (NULL);
 }
 
-void	start_thread(t_philos *philos)
+static int	init_thread_routine(t_philos *philos)
 {
 	int	i;
+	int	err;
 
 	i = 0;
-	philos->vars->threads = malloc(sizeof(pthread_t) * philos->input.philos);
-	if (philos->vars->threads == NULL)
-		exit(1);
 	while (i < philos->input.philos)
 	{
-		pthread_create(philos[i].vars->threads, NULL, \
+		err = pthread_create(philos[i].vars->threads, NULL, \
 			start_routine, &philos[i]);
+		if (err != 0)
+			return (1);
 		i++;
 	}
 	i = 0;
 	while (i < philos->input.philos)
 	{
-		pthread_join(*philos[i].vars->threads, NULL);
+		err = pthread_join(*philos[i].vars->threads, NULL);
+		if (err != 0)
+			return (1);
 		i++;
 	}
+	return (0);
+}
+
+int	start_thread(t_philos *philos)
+{
+	int	err;
+
+	philos->vars->threads = malloc(sizeof(pthread_t) * philos->input.philos);
+	if (philos->vars->threads == NULL)
+	{
+		free(philos->vars->threads);
+		return (1);
+	}
+	err = init_thread_routine(philos);
+	if (err != 0)
+		return (1);
+	return (0);
 }
