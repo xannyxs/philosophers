@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/09 17:45:04 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/09 18:40:59 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	setup_philo(t_philos *philos, t_input input)
 	}
 	i--;
 	philos[i].right_fork = 0;
+	philos->vars->death_status = false;
+	philos->vars->first_death = true;
 }
 
 int	main(int argc, char *argv[])

@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/09 17:45:18 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/09 18:39:47 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <stdbool.h>
 
 enum	e_status
 {
@@ -31,6 +32,8 @@ typedef struct s_input {
 }	t_input;
 
 typedef struct s_vars {
+	bool			death_status;
+	bool			first_death;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 }	t_vars;

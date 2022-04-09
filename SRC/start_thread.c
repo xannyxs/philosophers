@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/09 17:56:49 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/09 18:56:42 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,18 @@ static void	*start_routine(void *arg)
 	philos->last_time_eaten = 0;
 	while (true)
 	{
-		if (is_philo_dying(philos) == true)
+		if (is_philo_dying(philos) == true || philos->input.philos <= 1)
 		{
-			printf("philo %d has died\n", philos->philo_number);
-			exit(1);
+			pthread_mutex_lock(philos->vars->forks);
+			if (philos->vars->first_death == true)
+			{
+				printf("%4d | philo %d has died\n", get_current_time(philos),
+					philos->philo_number);
+				philos->vars->first_death = false;
+			}
+			philos->vars->death_status = true;
+			pthread_mutex_unlock(philos->vars->forks);
+			break ;
 		}
 		if (philos->status == EAT)
 			start_eat(philos);
