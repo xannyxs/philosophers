@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/09 18:39:47 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/11 18:33:49 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ enum	e_status
 {
 	EAT = 1,
 	SLEEP = 2,
-	THINK = 3
+	THINK = 3,
+	DEATH = 4
 };
 
 typedef struct s_input {
@@ -36,6 +37,7 @@ typedef struct s_vars {
 	bool			first_death;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*check_death_status;
 }	t_vars;
 
 typedef struct s_philos {
@@ -80,5 +82,7 @@ void				start_death(t_philos *philos);
 */
 
 int					ft_atoi(const char *str);
+
+void				print_wrap(t_philos *philos);
 
 #endif

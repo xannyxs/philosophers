@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/09 18:56:42 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/11 18:50:41 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,10 @@ static void	*start_routine(void *arg)
 	{
 		if (is_philo_dying(philos) == true || philos->input.philos <= 1)
 		{
-			pthread_mutex_lock(philos->vars->forks);
-			if (philos->vars->first_death == true)
-			{
-				printf("%4d | philo %d has died\n", get_current_time(philos),
-					philos->philo_number);
-				philos->vars->first_death = false;
-			}
+			philos->status = DEATH;
+			if (!pthread_mutex_lock(philos->vars->check_death_status))
+				print_wrap(philos);
 			philos->vars->death_status = true;
-			pthread_mutex_unlock(philos->vars->forks);
 			break ;
 		}
 		if (philos->status == EAT)
@@ -65,7 +60,7 @@ static int	init_thread_routine(t_philos *philos)
 	i = 0;
 	while (i < philos->input.philos)
 	{
-		err = pthread_create(philos[i].vars->threads, NULL, \
+		err = pthread_create(&philos[i].vars->threads[i], NULL, \
 			start_routine, &philos[i]);
 		if (err != 0)
 			return (1);
@@ -74,11 +69,18 @@ static int	init_thread_routine(t_philos *philos)
 	i = 0;
 	while (i < philos->input.philos)
 	{
-		err = pthread_join(*philos[i].vars->threads, NULL);
+		err = pthread_join(philos->vars->threads[i], NULL);
 		if (err != 0)
 			return (1);
 		i++;
 	}
+	i = 0;
+	while (i < philos->input.philos)
+	{
+		pthread_mutex_destroy(&philos->vars->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(philos->vars->check_death_status);
 	return (0);
 }
 

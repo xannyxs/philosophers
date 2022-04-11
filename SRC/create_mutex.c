@@ -6,13 +6,31 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 16:21:56 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/09 17:43:46 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/11 19:07:16 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 #include <stdlib.h>
+
+static int	setup_status_mutex(t_philos *philos)
+{
+	int	i;
+	int	err;
+
+	i = 0;
+	philos->vars->check_death_status = malloc(sizeof(pthread_mutex_t));
+	if (philos->vars->check_death_status == NULL)
+	{
+		free(philos->vars->check_death_status);
+		return (1);
+	}
+	err = pthread_mutex_init(philos->vars->check_death_status, NULL);
+	if (err != 0)
+		return (1);
+	return (0);
+}
 
 int	setup_mutex(t_philos *philos)
 {
@@ -27,11 +45,14 @@ int	setup_mutex(t_philos *philos)
 		free(philos->vars->forks);
 		return (1);
 	}
-	err = pthread_mutex_init(philos->vars->forks, NULL);
-	if (err != 0)
+	while (i < philos->input.philos)
 	{
-		pthread_mutex_destroy(philos->vars->forks);
-		return (1);
+		err = pthread_mutex_init(&philos->vars->forks[i], NULL);
+		if (err != 0)
+			return (1);
+		i++;
 	}
+	if (setup_status_mutex(philos) != 0)
+		return (1);
 	return (0);
 }
