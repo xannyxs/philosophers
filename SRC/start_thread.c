@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 18:05:54 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 20:36:42 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-#include <stdio.h>
-
-bool	is_philo_dying(t_philos *philos)
+static void	start_something(t_philos *philos)
 {
-	if (get_current_time(philos) - philos->last_time_eaten >= \
-		(unsigned long) philos->input.time_die)
-		return (true);
-	return (false);
+	if (philos->status == GRAB_LEFT)
+		start_eat(philos);
+	else if (philos->status == SLEEP)
+		start_sleep(philos);
+	else if (philos->status == THINK)
+		start_think(philos);
 }
 
 static void	*start_routine(void *arg)
@@ -36,7 +36,8 @@ static void	*start_routine(void *arg)
 		u_better_sleep(philos, 80);
 	while (true)
 	{
-		if (is_philo_dying(philos) == true || philos->input.philos <= 1)
+		if (is_philo_dying(philos) || philos->input.philos <= 1 || \
+			philos->vars->death_status)
 		{
 			philos->status = DEATH;
 			if (!pthread_mutex_lock(philos->vars->protect_printf))
@@ -46,17 +47,12 @@ static void	*start_routine(void *arg)
 			}
 			break ;
 		}
-		if (philos->status == GRAB_LEFT)
-			start_eat(philos);
-		else if (philos->status == SLEEP)
-			start_sleep(philos);
-		else if (philos->status == THINK)
-			start_think(philos);
+		start_something(philos);
 	}
 	return (NULL);
 }
 
-static int	init_thread_routine(t_philos *philos)
+static int	start_thread_create(t_philos *philos)
 {
 	int	i;
 	int	err;
@@ -70,7 +66,18 @@ static int	init_thread_routine(t_philos *philos)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+static int	init_thread_routine(t_philos *philos)
+{
+	int	i;
+	int	err;
+
 	i = 0;
+	err = start_thread_create(philos);
+	if (err != 0)
+		return (1);
 	while (i < philos->input.philos)
 	{
 		err = pthread_join(philos->vars->threads[i], NULL);

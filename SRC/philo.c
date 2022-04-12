@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 18:05:29 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 21:05:21 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ int	main(int argc, char *argv[])
 	err = start_thread(philos);
 	if (err != 0)
 		return (1);
+	free(philos->vars->forks);
+	free(philos->vars->threads);
 	return (0);
 }

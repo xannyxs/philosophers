@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 16:31:02 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 21:03:57 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,24 @@ void			start_death(t_philos *philos);
 
 int				ft_atoi(const char *str);
 
+void			ft_free_str_arr(char **arr);
+
+void			ft_free_mutex_arr(pthread_mutex_t **arr);
+
 void			print_wrap(t_philos *philos);
 
 void			u_better_sleep(t_philos *philos, unsigned long ms);
 
 bool			is_philo_dying(t_philos *philos);
+
+/*
+	PRINT
+*/
+
+void			print_eat(t_philos *philos);
+
+void			print_right_fork(t_philos *philos);
+
+void			print_left_fork(t_philos *philos);
 
 #endif
