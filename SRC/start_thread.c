@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 15:39:24 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 18:05:54 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,21 @@ static void	*start_routine(void *arg)
 
 	philos = arg;
 	philos->last_time_eaten = 0;
+	if (philos->philo_number % 2 == 0)
+		u_better_sleep(philos, 80);
 	while (true)
 	{
 		if (is_philo_dying(philos) == true || philos->input.philos <= 1)
 		{
 			philos->status = DEATH;
 			if (!pthread_mutex_lock(philos->vars->protect_printf))
+			{
+				philos->vars->death_status = true;
 				print_wrap(philos);
-			philos->vars->death_status = true;
+			}
 			break ;
 		}
-		if (philos->status == EAT)
+		if (philos->status == GRAB_LEFT)
 			start_eat(philos);
 		else if (philos->status == SLEEP)
 			start_sleep(philos);

@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 15:38:53 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 16:31:02 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ enum	e_status
 	EAT = 1,
 	SLEEP = 2,
 	THINK = 3,
-	DEATH = 4
+	DEATH = 4,
+	GRAB_LEFT = 5,
+	GRAB_RIGHT = 6
 };
 
 typedef struct s_input {
@@ -86,7 +88,7 @@ int				ft_atoi(const char *str);
 
 void			print_wrap(t_philos *philos);
 
-void			u_better_sleep(unsigned long ms);
+void			u_better_sleep(t_philos *philos, unsigned long ms);
 
 bool			is_philo_dying(t_philos *philos);
 

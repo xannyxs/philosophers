@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 15:31:40 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 18:05:29 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	setup_philo(t_philos *philos, t_input input)
 		philos[i].left_fork = i;
 		philos[i].right_fork = i + 1;
 		philos[i].start_time = philos[0].start_time;
-		philos[i].status = EAT;
+		philos[i].status = GRAB_LEFT;
 		i++;
 	}
 	i--;

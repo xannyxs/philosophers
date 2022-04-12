@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/09 17:31:48 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 15:15:25 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 16:30:23 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ unsigned long	get_time(void)
 	return (time);
 }
 
-void	u_better_sleep(unsigned long ms)
+void	u_better_sleep(t_philos *philos, unsigned long ms)
 {
 	unsigned long	starting_point;
 
 	starting_point = get_time();
 	while ((get_time() - starting_point) < ms)
+	{
 		usleep(150);
+		if (is_philo_dying(philos) == true)
+			return ;
+	}
 }
