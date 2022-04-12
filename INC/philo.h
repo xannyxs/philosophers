@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/11 18:33:49 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 15:38:53 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <pthread.h>
 # include <stdbool.h>
+# include <signal.h>
 
 enum	e_status
 {
@@ -37,52 +38,56 @@ typedef struct s_vars {
 	bool			first_death;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*check_death_status;
+	pthread_mutex_t	*protect_printf;
 }	t_vars;
 
 typedef struct s_philos {
-	int					philo_number;
-	int					left_fork;
-	int					right_fork;
-	int					status;
-	t_input				input;
-	t_vars				*vars;
-	unsigned long long	start_time;
-	unsigned long long	last_time_eaten;
+	int				philo_number;
+	int				left_fork;
+	int				right_fork;
+	int				status;
+	t_input			input;
+	t_vars			*vars;
+	unsigned long	start_time;
+	unsigned long	last_time_eaten;
 }	t_philos;
 
 /*
 	PHILO
 */
 
-int					start_thread(t_philos *philos);
+int				start_thread(t_philos *philos);
 
-int					setup_mutex(t_philos *philos);
+int				setup_mutex(t_philos *philos);
 
-void				*start(void *arg);
+void			*start(void *arg);
 
-unsigned long long	get_time(void);
+int				get_current_time(t_philos *philos);
 
-int					get_current_time(t_philos *philos);
+unsigned long	get_time(void);
 
 /*
 	PHASES PHILOS
 */
 
-void				start_think(t_philos *philos);
+void			start_think(t_philos *philos);
 
-void				start_sleep(t_philos *philos);
+void			start_sleep(t_philos *philos);
 
-void				start_eat(t_philos *philos);
+void			start_eat(t_philos *philos);
 
-void				start_death(t_philos *philos);
+void			start_death(t_philos *philos);
 
 /*
 	UTILS
 */
 
-int					ft_atoi(const char *str);
+int				ft_atoi(const char *str);
 
-void				print_wrap(t_philos *philos);
+void			print_wrap(t_philos *philos);
+
+void			u_better_sleep(unsigned long ms);
+
+bool			is_philo_dying(t_philos *philos);
 
 #endif

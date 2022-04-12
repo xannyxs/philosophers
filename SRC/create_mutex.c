@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 16:21:56 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/11 19:07:16 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 14:02:19 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static int	setup_status_mutex(t_philos *philos)
 	int	err;
 
 	i = 0;
-	philos->vars->check_death_status = malloc(sizeof(pthread_mutex_t));
-	if (philos->vars->check_death_status == NULL)
+	philos->vars->protect_printf = malloc(sizeof(pthread_mutex_t));
+	if (philos->vars->protect_printf == NULL)
 	{
-		free(philos->vars->check_death_status);
+		free(philos->vars->protect_printf);
 		return (1);
 	}
-	err = pthread_mutex_init(philos->vars->check_death_status, NULL);
+	err = pthread_mutex_init(philos->vars->protect_printf, NULL);
 	if (err != 0)
 		return (1);
 	return (0);

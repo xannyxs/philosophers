@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/11 18:50:41 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 15:39:24 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 #include <stdio.h>
 
-static bool	is_philo_dying(t_philos *philos)
+bool	is_philo_dying(t_philos *philos)
 {
 	if (get_current_time(philos) - philos->last_time_eaten >= \
-		(unsigned long long) philos->input.time_die)
+		(unsigned long) philos->input.time_die)
 		return (true);
 	return (false);
 }
@@ -37,7 +37,7 @@ static void	*start_routine(void *arg)
 		if (is_philo_dying(philos) == true || philos->input.philos <= 1)
 		{
 			philos->status = DEATH;
-			if (!pthread_mutex_lock(philos->vars->check_death_status))
+			if (!pthread_mutex_lock(philos->vars->protect_printf))
 				print_wrap(philos);
 			philos->vars->death_status = true;
 			break ;
@@ -80,7 +80,7 @@ static int	init_thread_routine(t_philos *philos)
 		pthread_mutex_destroy(&philos->vars->forks[i]);
 		i++;
 	}
-	pthread_mutex_destroy(philos->vars->check_death_status);
+	pthread_mutex_destroy(philos->vars->protect_printf);
 	return (0);
 }
 

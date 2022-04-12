@@ -6,7 +6,7 @@
 /*   By: xander <xander@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/10 22:32:59 by xander        #+#    #+#                 */
-/*   Updated: 2022/04/11 18:44:57 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 15:26:23 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 void	start_sleep(t_philos *philos)
 {
-	if (!pthread_mutex_lock(philos->vars->check_death_status))
+	if (!pthread_mutex_lock(philos->vars->protect_printf))
 		print_wrap(philos);
-	usleep(philos->input.time_sleep * 1000);
+	u_better_sleep(philos->input.time_sleep);
 	philos->status = THINK;
 }

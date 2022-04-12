@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 18:28:16 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/11 18:53:58 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 15:41:49 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ static void	print_eat_and_forks(t_philos *philos)
 	pthread_mutex_lock(&philos->vars->forks[philos->left_fork]);
 	printf("%4d | %d has taken a left fork\n", \
 		get_current_time(philos), philos->philo_number);
+	if (is_philo_dying(philos) == true)
+		return ;
 	pthread_mutex_lock(&philos->vars->forks[philos->right_fork]);
 	printf("%4d | %d has taken a right fork\n", \
 		get_current_time(philos), philos->philo_number);
+	if (is_philo_dying(philos) == true)
+		return ;
 	printf("%4d | %d is eating\n", \
 		get_current_time(philos), philos->philo_number);
 }
@@ -58,5 +62,5 @@ void	print_wrap(t_philos *philos)
 		else if (philos->status == SLEEP)
 			print_sleep(philos);
 	}
-	pthread_mutex_unlock(philos->vars->check_death_status);
+	pthread_mutex_unlock(philos->vars->protect_printf);
 }

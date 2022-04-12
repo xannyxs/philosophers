@@ -6,7 +6,7 @@
 /*   By: xander <xander@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/10 22:27:51 by xander        #+#    #+#                 */
-/*   Updated: 2022/04/11 18:43:39 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/12 14:02:56 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	start_think(t_philos *philos)
 {
-	if (!pthread_mutex_lock(philos->vars->check_death_status))
+	if (!pthread_mutex_lock(philos->vars->protect_printf))
 		print_wrap(philos);
 	philos->status = EAT;
 }
