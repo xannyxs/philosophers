@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/04/13 18:31:20 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/04/13 19:04:00 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@echo "\n"
-	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
 	@printf $(REM_MESSAGE)
 	@echo "\n"
 
