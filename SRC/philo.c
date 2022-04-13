@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/13 18:27:08 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:41:40 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	convert_input(char *argv[], t_input *input)
 	if (argv[5] != NULL)
 	{
 		input->amount_eat = ft_atoi(argv[5]);
-		if (input->time_sleep < 1)
+		if (input->amount_eat < 1)
 			return (ERROR);
 	}
 	else
