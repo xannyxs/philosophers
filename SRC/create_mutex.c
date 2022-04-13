@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/07 16:21:56 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 20:52:31 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 12:46:15 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	setup_mutex(t_philos *philos)
 	philos->vars->forks = malloc(sizeof(pthread_mutex_t) \
 		* philos->input.philos);
 	if (philos->vars->forks == NULL)
+	{
+		free(philos->vars);
+		free(philos);
 		return (1);
+	}
 	while (i < philos->input.philos)
 	{
 		err = pthread_mutex_init(&philos->vars->forks[i], NULL);
