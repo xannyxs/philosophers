@@ -6,13 +6,13 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 18:28:16 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 20:34:41 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:30:55 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <stdio.h>
+#include <stdio.h> /* printf */
 
 static void	print_death(t_philos *philos)
 {

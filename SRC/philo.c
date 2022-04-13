@@ -6,14 +6,13 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/13 16:03:21 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:27:08 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <stdlib.h>
-#include <sys/time.h>
+#include <stdlib.h> /* Free */
 
 #define MORE_ARGC 1
 #define NON_VALID_DIGITS 2

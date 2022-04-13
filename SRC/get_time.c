@@ -6,16 +6,14 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/09 17:31:48 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 20:28:58 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:28:16 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <sys/time.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <sys/time.h> /* gettimeofday */
+#include <unistd.h> /* usleep */
 
 int	get_current_time(t_philos *philos)
 {

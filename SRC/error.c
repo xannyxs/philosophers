@@ -6,15 +6,14 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/13 12:46:51 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/13 16:23:20 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:29:19 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include <unistd.h> /* write */
+#include <stdlib.h> /* free */
 
 int	destroy_fork_mutex(t_philos *philos)
 {
@@ -49,12 +48,12 @@ int	destroy_all_mutex(t_philos *philos)
 int	error_msg(int error_num)
 {
 	if (error_num == 1)
-		dprintf(STDERR_FILENO, "Need more arguments");
+		write(STDERR_FILENO, "Need more arguments", 20);
 	else if (error_num == 2)
-		dprintf(STDERR_FILENO, "You cannot use negative digtis");
+		write(STDERR_FILENO, "You cannot use negative digtis", 31);
 	else if (error_num == 3)
-		dprintf(STDERR_FILENO, "malloc: Out of memory");
-	dprintf(STDERR_FILENO, "\n");
+		write(STDERR_FILENO, "malloc: Out of memory", 22);
+	write(STDERR_FILENO, "\n", 1);
 	return (ERROR);
 }
 
@@ -65,7 +64,7 @@ int	error_complex_msg(int error_num, t_philos *philos)
 		if (error_num == 5)
 			free(philos->vars);
 		free(philos);
-		dprintf(STDERR_FILENO, "malloc: Out of memory");
+		write(STDERR_FILENO, "malloc: Out of memory", 22);
 	}
 	else if (error_num == 6 || error_num == 7 || error_num == 8)
 	{
@@ -77,10 +76,10 @@ int	error_complex_msg(int error_num, t_philos *philos)
 		free(philos->vars);
 		free(philos);
 		if (error_num == 6 || error_num == 8)
-			dprintf(STDERR_FILENO, "pthread mutex: somethings wrong...");
+			write(STDERR_FILENO, "pthread mutex: something is wrong...", 37);
 		else if (error_num == 7)
-			dprintf(STDERR_FILENO, "malloc: Out of memory");
+			write(STDERR_FILENO, "malloc: Out of memory", 22);
 	}
-	dprintf(STDERR_FILENO, "\n");
+	write(STDERR_FILENO, "\n", 1);
 	return (ERROR);
 }

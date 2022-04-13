@@ -6,14 +6,11 @@
 /*   By: xander <xander@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/10 22:31:45 by xander        #+#    #+#                 */
-/*   Updated: 2022/04/12 20:38:01 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:31:50 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-#include <unistd.h>
-#include <stdio.h>
 
 static int	grab_fork(t_philos *philos)
 {

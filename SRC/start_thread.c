@@ -6,15 +6,13 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 11:37:34 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/13 16:12:35 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:28:59 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdbool.h>
+#include <stdlib.h> /* malloc */
 
 static int	start_something(t_philos *philos)
 {

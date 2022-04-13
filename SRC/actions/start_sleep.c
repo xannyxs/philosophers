@@ -6,14 +6,11 @@
 /*   By: xander <xander@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/10 22:32:59 by xander        #+#    #+#                 */
-/*   Updated: 2022/04/12 16:31:31 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:31:57 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-#include <stdio.h>
-#include <unistd.h>
 
 void	start_sleep(t_philos *philos)
 {

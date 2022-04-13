@@ -6,13 +6,13 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/12 20:34:30 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 20:36:14 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:31:02 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <stdio.h>
+#include <stdio.h> /* printf */
 
 void	print_eat(t_philos *philos)
 {

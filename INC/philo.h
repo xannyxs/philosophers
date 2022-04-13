@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/13 16:03:28 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 18:31:29 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <pthread.h>
 # include <stdbool.h>
-# include <signal.h>
 
 # define SUCCES 0
 # define ERROR 1
@@ -85,17 +84,11 @@ void			start_sleep(t_philos *philos);
 
 void			start_eat(t_philos *philos);
 
-void			start_death(t_philos *philos);
-
 /*
 	UTILS
 */
 
 int				ft_atoi(const char *str);
-
-void			ft_free_str_arr(char **arr);
-
-void			ft_free_mutex_arr(pthread_mutex_t **arr);
 
 void			print_wrap(t_philos *philos);
 
