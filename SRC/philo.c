@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/16 19:11:35 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 21:05:21 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 16:03:21 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 #include <stdlib.h>
 #include <sys/time.h>
+
+#define MORE_ARGC 1
+#define NON_VALID_DIGITS 2
+#define MALLOC_ERR 3
 
 static int	convert_input(char *argv[], t_input *input)
 {
@@ -23,14 +27,16 @@ static int	convert_input(char *argv[], t_input *input)
 	input->time_sleep = ft_atoi(argv[4]);
 	if (input->philos < 1 || input->time_die < 1 || \
 		input->time_eat < 1 || input->time_sleep < 1)
-		return (1);
+		return (ERROR);
 	if (argv[5] != NULL)
 	{
 		input->amount_eat = ft_atoi(argv[5]);
 		if (input->time_sleep < 1)
-			return (1);
+			return (ERROR);
 	}
-	return (0);
+	else
+		input->amount_eat = -2;
+	return (SUCCES);
 }
 
 static void	setup_philo(t_philos *philos, t_input input)
@@ -56,31 +62,36 @@ static void	setup_philo(t_philos *philos, t_input input)
 	philos->vars->first_death = true;
 }
 
+static void	free_all(t_philos *philos)
+{
+	free(philos->vars->protect_printf);
+	free(philos->vars->forks);
+	free(philos->vars->threads);
+	free(philos->vars);
+	free(philos);
+}
+
 int	main(int argc, char *argv[])
 {
-	int			err;
 	t_input		input;
 	t_philos	*philos;
 
+	philos = NULL;
 	if (argc > 6 || argc < 5)
-		return (1);
-	err = convert_input(argv, &input);
-	if (err != 0)
-		return (1);
+		return (error_msg(MORE_ARGC));
+	if (convert_input(argv, &input))
+		return (error_msg(NON_VALID_DIGITS));
 	philos = malloc(sizeof(t_philos) * input.philos);
-	if (philos == NULL)
-		return (1);
+	if (!philos)
+		return (error_msg(MALLOC_ERR));
 	philos->vars = malloc(sizeof(t_vars));
-	if (philos->vars == NULL)
-		return (1);
+	if (!philos->vars)
+		return (error_complex_msg(4, philos));
 	setup_philo(philos, input);
-	err = setup_mutex(philos);
-	if (err != 0)
-		return (1);
-	err = start_thread(philos);
-	if (err != 0)
-		return (1);
-	free(philos->vars->forks);
-	free(philos->vars->threads);
+	if (setup_mutex(philos))
+		return (ERROR);
+	if (start_thread(philos))
+		return (ERROR);
+	free_all(philos);
 	return (0);
 }

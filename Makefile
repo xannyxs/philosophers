@@ -6,7 +6,7 @@
 #    By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/02/01 14:31:21 by xvoorvaa      #+#    #+#                  #
-#    Updated: 2022/04/12 21:02:22 by xvoorvaa      ########   odam.nl          #
+#    Updated: 2022/04/13 13:01:52 by xvoorvaa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS			=	$(SRC_DIR)/philo.c \
 					$(SRC_DIR)/get_time.c \
 					$(SRC_DIR)/create_mutex.c \
 					$(SRC_DIR)/start_thread.c \
+					$(SRC_DIR)/error.c \
 					$(SRC_DIR)/utils/ft_atoi.c \
 					$(SRC_DIR)/utils/print_wrap.c \
 					$(SRC_DIR)/utils/is_philo_dying.c \

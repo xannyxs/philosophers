@@ -6,7 +6,7 @@
 /*   By: xvoorvaa <xvoorvaa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/01 14:09:18 by xvoorvaa      #+#    #+#                 */
-/*   Updated: 2022/04/12 21:03:57 by xvoorvaa      ########   odam.nl         */
+/*   Updated: 2022/04/13 16:03:28 by xvoorvaa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <signal.h>
+
+# define SUCCES 0
+# define ERROR 1
 
 enum	e_status
 {
@@ -68,6 +71,10 @@ int				get_current_time(t_philos *philos);
 
 unsigned long	get_time(void);
 
+int				error_msg(int error_num);
+
+int				error_complex_msg(int error_num, t_philos *philos);
+
 /*
 	PHASES PHILOS
 */
@@ -95,6 +102,10 @@ void			print_wrap(t_philos *philos);
 void			u_better_sleep(t_philos *philos, unsigned long ms);
 
 bool			is_philo_dying(t_philos *philos);
+
+int				destroy_all_mutex(t_philos *philos);
+
+int				destroy_fork_mutex(t_philos *philos);
 
 /*
 	PRINT
